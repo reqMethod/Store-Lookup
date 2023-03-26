@@ -17,12 +17,13 @@ def create_table():
 
 def add_one(storenum, address, number):
     connect()
-    c.execute(f"SELECT* FROM contacts WHERE storenum = '{storenum}' AND address = '{address}' AND number = '{number}'")
-    result = c.fetchall
+    c.execute(f"SELECT * FROM contacts WHERE storenum = '{storenum}' AND address = '{address}' AND number = '{number}'")
+    result = c.fetchall()
     if len(result) == 0 and storenum != "" and address != "" and number != "":
-        c.execute("INSERT INTO contacts VALUES (?, ?, ?),", storenum, address, number)
-        conn.commit()
-        conn.close()
+        c.execute("INSERT INTO contacts VALUES (?, ?, ?)", (storenum, address, number))
+    conn.commit()
+    conn.close()
+    
 
 def show():
     connect()
@@ -43,12 +44,10 @@ def update(id, storenum="", address="", number=""):
     if storenum != "":
         c.execute(f"UPDATE contacts SET storenum='{storenum}' WHERE rowid = {id}")
     if address != "":
-        c.execute(f"UPDATE contacts SET storenum='{address}' WHERE rowid = {id}")
+        c.execute(f"UPDATE contacts SET address='{address}' WHERE rowid = {id}")
     if number != "":
-        c.execute(f"UPDATE contacts SET storenum='{number}' WHERE rowid = {id}")
+        c.execute(f"UPDATE contacts SET number='{number}' WHERE rowid = {id}")
     conn.commit
     conn.close
-
-    
 
 create_table()

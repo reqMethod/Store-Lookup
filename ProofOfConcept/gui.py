@@ -3,7 +3,7 @@ from tkinter import *
 from tkinter import ttk
 
 root = Tk()
-root.geometry("790x720")
+root.geometry("920x860")
 
 frame1 = Frame(root)
 frame1.place(x=40, y=10)
@@ -34,7 +34,6 @@ treev.heading("4", text="Phone Number")
 
 # Creating Functions
 def add_one(storenum, address, number):
-    global treev
     main.add_one(storenum, address, number)
     show()
 
@@ -52,29 +51,29 @@ id_entry = Entry(root, width=10)
 id_entry.place(x=70, y=550)
 
 storenum_label = Label(root, text="STORE#: ")
-storenum_label.place(x=140, y=550)
+storenum_label.place(x=175, y=550)
 storenum_entry = Entry(root, width=10)
-storenum_entry.place(x=218, y=550)
+storenum_entry.place(x=240, y=550)
 
 address_label = Label(root, text="ADDRESS: ")
-address_label.place(x=340, y=550)
-address_entry = Entry(root)
-address_entry.place(x=410, y=550)
+address_label.place(x=10, y=600)
+address_entry = Entry(root, width=60)
+address_entry.place(x=70, y=600)
 
 number_label = Label(root, text="Phone#: ")
-number_label.place(x=540, y=550)
-number_entry = Entry(root)
-number_entry.place(x=580, y=550)
+number_label.place(x=10, y=650)
+number_entry = Entry(root, width=40)
+number_entry.place(x=70, y=650)
 
 # Creating Buttons
 createButton = Button(text="CREATE", bg="lightgreen", command=lambda:add_one(storenum_entry.get(), address_entry.get(), number_entry.get()))
-createButton.place(x=720, y=550)
+createButton.place(x=800, y=550)
 
 updateButton = Button(text="UPDATE", bg="orange", command=lambda:update(id_entry.get(), storenum_entry.get(), address_entry.get(), number_entry.get()))
-updateButton.place(x=720, y=585)
+updateButton.place(x=800, y=585)
 
 deleteButton = Button(text="DELETE", bg="red", command=lambda:delete(id_entry.get()))
-deleteButton.place(x=720, y=625)
+deleteButton.place(x=800, y=625)
 
 def show():
     global treev
