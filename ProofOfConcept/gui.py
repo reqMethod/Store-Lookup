@@ -36,14 +36,15 @@ treev.heading("4", text="Phone Number")
 def add_one(storenum, address, number):
     global treev
     main.add_one(storenum, address, number)
+    show()
 
 def update(id, storenum, address,number):
-    global treev
     main.update(id, storenum, address, number)
+    show()
 
 def delete(id):
-    global treev
     main.delete(id)
+    show()
 
 id_label = Label(root, text="ROW ID: ")
 id_label.place(x=10, y=550)
@@ -76,6 +77,8 @@ deleteButton = Button(text="DELETE", bg="red", command=lambda:delete(id_entry.ge
 deleteButton.place(x=720, y=625)
 
 def show():
+    global treev
+    treev.delete(*treev.get_children())
     for i in main.show():
         treev.insert("" , 'end', values = (i[0], i[1], i[2], i[3]))
 
