@@ -7,47 +7,60 @@ def connect():
 
 def create_table():
     connect()
-    c.execute("""CREATE TABLE IF NOT EXISTS contacts (
-    storenum text, 
-    address text,
-    number text
-    ) """)
-    conn.commit()
-    conn.close()
-
-def add_one(storenum, address, number):
-    connect()
-    c.execute(f"SELECT * FROM contacts WHERE storenum = '{storenum}' AND address = '{address}' AND number = '{number}'")
-    result = c.fetchall()
-    if len(result) == 0 and storenum != "" and address != "" and number != "":
-        c.execute("INSERT INTO contacts VALUES (?, ?, ?)", (storenum, address, number))
+    c.execute("""CREATE TABLE IF NOT EXISTS "dw_Loc" (
+    "LOC_ID" VARCHAR(10),
+    "LOC_NM" VARCHAR(100),
+    "LOC_TEL_NBR" VARCHAR(50),
+    "LOC_EMAIL_TXT" VARCHAR(250),
+    "ADDR_LN_1_TXT" VARCHAR(100),
+    "TRIAL491" CHAR(1)) """)
     conn.commit()
     conn.close()
     
 
+def add_one(storenum, name, number, email, address, trial):
+    connect()
+    c.execute(f"SELECT * FROM dw_Loc WHERE LOC_ID = '{storenum}' AND LOC_NM = '{name}' AND LOC_TEL_NBR = '{number}' AND LOC_EMAIL_TXT = '{email}' AND ADDR_LN_1_TXT = '{address}' AND TRIAL491 = '{trial}'")
+    result = c.fetchall()
+    if len(result) == 0 and storenum != "" and name != "" and number != "" and email != "" and address != "" and trial !="":
+        c.execute("INSERT INTO dw_Loc VALUES (?, ?, ?, ?, ?, ?)", (storenum, name, number, email, address, trial))
+    conn.commit()
+    conn.close()
+    
+    
+
 def show():
     connect()
-    c.execute("SELECT rowid, * FROM contacts")
+    c.execute("SELECT rowid, * FROM dw_Loc")
     result = c.fetchall()
     conn.commit()
     conn.close()
+    
     return result
 
 def delete(id):
     connect()
-    c.execute(f"DELETE FROM contacts WHERE rowid = {id}")
+    c.execute(f"DELETE FROM dw_Loc WHERE rowid = {id}")
     conn.commit()
     conn.close()
+    
 
-def update(id, storenum="", address="", number=""):
+def update(id, storenum="", name="", number="", email="", address="", trial=""):
     connect()
     if storenum != "":
-        c.execute(f"UPDATE contacts SET storenum='{storenum}' WHERE rowid = {id}")
-    if address != "":
-        c.execute(f"UPDATE contacts SET address='{address}' WHERE rowid = {id}")
+        c.execute(f"UPDATE dw_Loc SET LOC_ID='{storenum}' WHERE rowid = {id}")
+    if name != "":
+        c.execute(f"UPDATE dw_Loc SET LOC_NM='{name}' WHERE rowid = {id}")
     if number != "":
-        c.execute(f"UPDATE contacts SET number='{number}' WHERE rowid = {id}")
+        c.execute(f"UPDATE dw_Loc SET LOC_TEL_NBR='{number}' WHERE rowid = {id}")
+    if email != "":
+        c.execute(f"UPDATE dw_Loc SET LOC_EMAIL_TXT='{email}' WHERE rowid = {id}")
+    if address != "":
+        c.execute(f"UPDATE dw_Loc SET ADDR_LN_1_TXT='{address}' WHERE rowid = {id}")
+    if trial != "":
+        c.execute(f"UPDATE dw_Loc SET TRIAL491='{trial}' WHERE rowid = {id}")
     conn.commit
     conn.close
+    
 
 create_table()
