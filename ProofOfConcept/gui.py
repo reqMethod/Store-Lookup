@@ -89,13 +89,15 @@ trial_entry.place(x=400, y=600)
 
 # Creating Buttons
 createButton = Button(text="CREATE", bg="lightgreen", command=lambda:add_one(storenum_entry.get(), name_entry.get(), number_entry.get(), email_entry.get(), address_entry.get(), trial_entry.get()))
-createButton.place(x=800, y=550)
+createButton.place(x=650, y=550)
 
 updateButton = Button(text="UPDATE", bg="orange", command=lambda:update(id_entry.get(), storenum_entry.get(), name_entry.get(), number_entry.get(), email_entry.get(), address_entry.get(), trial_entry.get()))
-updateButton.place(x=800, y=585)
+updateButton.place(x=650, y=585)
 
 deleteButton = Button(text="DELETE", bg="red", command=lambda:delete(id_entry.get()))
-deleteButton.place(x=800, y=625)
+deleteButton.place(x=650, y=625)
+
+
 
 def show():
     global treev

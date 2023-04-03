@@ -35,7 +35,14 @@ def show():
     result = c.fetchall()
     conn.commit()
     conn.close()
-    
+    return result
+
+def showSpecific(storenum):
+    connect()
+    c.execute(f"SELECT rowid, * FROM dw_Loc WHERE LOC_ID ='{storenum}'")
+    result = c.fetchall()
+    conn.commit()
+    conn.close()
     return result
 
 def delete(id):
