@@ -26,8 +26,6 @@ def add_one(storenum, name, number, email, address, trial):
         c.execute("INSERT INTO dw_Loc VALUES (?, ?, ?, ?, ?, ?)", (storenum, name, number, email, address, trial))
     conn.commit()
     conn.close()
-    
-    
 
 def show():
     connect()
@@ -51,7 +49,6 @@ def delete(id):
     conn.commit()
     conn.close()
     
-
 def update(id, storenum="", name="", number="", email="", address="", trial=""):
     connect()
     if storenum != "":
@@ -68,6 +65,5 @@ def update(id, storenum="", name="", number="", email="", address="", trial=""):
         c.execute(f"UPDATE dw_Loc SET TRIAL491='{trial}' WHERE rowid = {id}")
     conn.commit
     conn.close
-    
 
 create_table()
